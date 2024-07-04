@@ -4,6 +4,7 @@ export default function Page() {
   return (
     <main>
       schedulr docs
+      <Button></Button>
     </main>
   );
 }
