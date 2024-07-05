@@ -1,0 +1,35 @@
+{
+  "name": "@schedulr/db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20",
+    "prisma": "^5.16.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@prisma/client": "5.16.1"
+  },
+  "types": "./db.ts",
+  "exports": {
+    ".": {
+      "require": "./db.ts",
+      "import": "./db.ts",
+      "default": "./db.ts",
+      "types": "./db.ts"
+    },
+    "./*": {
+      "require": "./db.ts",
+      "import": "./db.ts",
+      "types": "./db.ts"
+    }
+  }
+}
