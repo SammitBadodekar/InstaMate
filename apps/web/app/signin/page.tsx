@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@schedulr/ui"
+import { Button } from "@instamate/ui"
 import { useSession } from "next-auth/react";
 import { signIn } from "../auth/helper";
 import { useRouter, useSearchParams } from "next/navigation";

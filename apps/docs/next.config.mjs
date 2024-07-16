@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@schedulr/ui"],
+  transpilePackages: ["@instamate/ui"],
 };
 
 export default nextConfig;

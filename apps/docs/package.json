@@ -9,15 +9,15 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@schedulr/ui": "workspace:*",
+    "@instamate/ui": "workspace:*",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "14.2.4",
-    "@schedulr/eslint-config": "workspace:*",
-    "@schedulr/typescript-config": "workspace:*",
+    "@instamate/eslint-config": "workspace:*",
+    "@instamate/typescript-config": "workspace:*",
     "@types/eslint": "^8",
     "@types/node": "^20",
     "@types/react": "^18",

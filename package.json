@@ -8,11 +8,11 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "ui:add": "pnpm --filter @schedulr/ui ui:add"
+    "ui:add": "pnpm --filter @instamate/ui ui:add"
   },
   "devDependencies": {
-    "@schedulr/eslint-config": "workspace:*",
-    "@schedulr/typescript-config": "workspace:*",
+    "@instamate/eslint-config": "workspace:*",
+    "@instamate/typescript-config": "workspace:*",
     "prettier": "^3.3.2",
     "turbo": "latest"
   },

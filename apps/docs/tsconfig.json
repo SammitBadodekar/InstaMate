@@ -1,5 +1,5 @@
 {
-  "extends": "@schedulr/typescript-config/nextjs.json",
+  "extends": "@instamate/typescript-config/nextjs.json",
   "compilerOptions": {
     "plugins": [
       {

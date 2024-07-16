@@ -1,1 +1,1 @@
-export { default } from "@schedulr/ui/postcss.config";
+export { default } from "@instamate/ui/postcss.config";

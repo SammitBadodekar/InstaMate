@@ -1,5 +1,5 @@
 {
-  "name": "@schedulr/eslint-config",
+  "name": "@instamate/eslint-config",
   "version": "0.0.0",
   "private": true,
   "files": [

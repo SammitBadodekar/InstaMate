@@ -1,1 +1,1 @@
-export * from "@schedulr/ui/tailwind.config";
+export * from "@instamate/ui/tailwind.config";

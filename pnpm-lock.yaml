@@ -8,10 +8,10 @@ importers:
 
   .:
     devDependencies:
-      '@schedulr/eslint-config':
+      '@instamate/eslint-config':
         specifier: workspace:*
         version: link:packages/eslint-config
-      '@schedulr/typescript-config':
+      '@instamate/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
       prettier:
@@ -23,7 +23,7 @@ importers:
 
   apps/docs:
     dependencies:
-      '@schedulr/ui':
+      '@instamate/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -39,10 +39,10 @@ importers:
       '@next/eslint-plugin-next':
         specifier: 14.2.4
         version: 14.2.4
-      '@schedulr/eslint-config':
+      '@instamate/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@schedulr/typescript-config':
+      '@instamate/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@types/eslint':
@@ -90,10 +90,10 @@ importers:
       '@prisma/client':
         specifier: 5.16.1
         version: 5.16.1(prisma@5.16.1)
-      '@schedulr/db':
+      '@instamate/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@schedulr/ui':
+      '@instamate/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       arctic:
@@ -224,10 +224,10 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.4)
     devDependencies:
-      '@schedulr/eslint-config':
+      '@instamate/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@schedulr/typescript-config':
+      '@instamate/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':

@@ -1,5 +1,5 @@
 {
-  "name": "@schedulr/ui",
+  "name": "@instamate/ui",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
     "react": "^18"
   },
   "devDependencies": {
-    "@schedulr/eslint-config": "workspace:*",
-    "@schedulr/typescript-config": "workspace:*",
+    "@instamate/eslint-config": "workspace:*",
+    "@instamate/typescript-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "autoprefixer": "^10.4.19",

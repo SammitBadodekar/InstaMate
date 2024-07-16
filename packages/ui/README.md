@@ -1,1 +1,1 @@
-# `@schedulr/ui`
+# `@instamate/ui`

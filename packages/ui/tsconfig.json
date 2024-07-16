@@ -1,5 +1,5 @@
 {
-  "extends": "@schedulr/typescript-config/react-library.json",
+  "extends": "@instamate/typescript-config/react-library.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

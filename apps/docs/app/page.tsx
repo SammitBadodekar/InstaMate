@@ -1,9 +1,9 @@
-import { Button } from "@schedulr/ui/components/ui/button";
+import { Button } from "@instamate/ui/components/ui/button";
 
 export default function Page() {
   return (
     <main>
-      schedulr docs
+      instamate docs
       <Button></Button>
     </main>
   );

@@ -1,11 +1,11 @@
 "use client"
 import Link from "next/link"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@schedulr/ui"
-import { Card, CardHeader, CardTitle, CardContent } from "@schedulr/ui"
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@schedulr/ui"
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@instamate/ui"
+import { Card, CardHeader, CardTitle, CardContent } from "@instamate/ui"
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@instamate/ui"
 import { ResponsiveLine } from "@nivo/line"
 import { ResponsiveBar } from "@nivo/bar"
-import { Button } from "@schedulr/ui"
+import { Button } from "@instamate/ui"
 
 export default function Dashboard() {
     return (
