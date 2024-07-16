@@ -1,5 +1,5 @@
 "use server";
-import { signIn as naSignIn, signOut as naSignOut } from "./auth";
+import { signIn as naSignIn, signOut as naSignOut } from ".";
 
 export async function signIn(params: string) {
     await naSignIn(params);

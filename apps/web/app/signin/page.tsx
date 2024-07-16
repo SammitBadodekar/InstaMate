@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@instamate/ui"
 import { useSession } from "next-auth/react";
-import { signIn } from "../auth/helper";
+import { signIn } from "@/auth/helper";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignIn() {
@@ -16,10 +16,10 @@ export default function SignIn() {
     return (
         <form
             action={async () => {
-                await signIn("google")
+                await signIn("facebook")
             }}
         >
-            <Button type="submit">Signin with Google</Button>
+            <Button type="submit">Signin with facebook</Button>
         </form>
     )
 } 

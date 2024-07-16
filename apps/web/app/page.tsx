@@ -1,6 +1,6 @@
 import Dashboard from "@/components/dashboard";
 import Image from "next/image";
-import { auth } from "@/app/auth/auth"
+import { auth } from "@/auth"
 
 export default async function Home() {
   const session = await auth()

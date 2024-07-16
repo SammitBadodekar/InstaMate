@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 import Google from "next-auth/providers/google"
+import Facebook from "next-auth/providers/facebook"
 
 const prisma = new PrismaClient()
 
@@ -17,6 +18,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 },
             },
         }),
+        Facebook({
+
+        })
     ],
     callbacks: {
         authorized: async ({ auth }) => {
