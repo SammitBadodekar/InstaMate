@@ -1,0 +1,10 @@
+<svg width="205" height="156" viewBox="0 0 205 156" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="26.5" y="40.5" width="153" height="91" rx="36.5" fill="white" stroke="black" stroke-width="7"/>
+<rect x="44.5" y="58.5" width="118" height="54" rx="27" fill="black" stroke="black" stroke-width="5"/>
+<path d="M98.5 85.8845C98.5 96.6915 90.4051 105.384 80.5 105.384C70.5949 105.384 62.5 96.6915 62.5 85.8845C62.5 75.0775 70.5949 66.3845 80.5 66.3845C90.4051 66.3845 98.5 75.0775 98.5 85.8845Z" fill="white" stroke="black"/>
+<path d="M144.5 86.5C144.5 97.5952 136.394 106.5 126.5 106.5C116.606 106.5 108.5 97.5952 108.5 86.5C108.5 75.4048 116.606 66.5 126.5 66.5C136.394 66.5 144.5 75.4048 144.5 86.5Z" fill="white" stroke="black"/>
+<path d="M24 67.5H26.5V104.5H24C19.3056 104.5 15.5 100.694 15.5 96V76C15.5 71.3056 19.3056 67.5 24 67.5Z" fill="white" stroke="black" stroke-width="7"/>
+<path d="M181 104.5H178.5V68.5H181C185.694 68.5 189.5 72.3056 189.5 77V96C189.5 100.694 185.694 104.5 181 104.5Z" fill="white" stroke="black" stroke-width="7"/>
+<line x1="104.834" y1="41.4108" x2="91.8483" y2="14.5221" stroke="black" stroke-width="7"/>
+<circle cx="92.5" cy="16.5" r="6" fill="white" stroke="black" stroke-width="5"/>
+</svg>

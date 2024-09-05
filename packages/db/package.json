@@ -16,7 +16,7 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "@prisma/client": "5.16.1"
+    "@prisma/client": "5.19.0"
   },
   "types": "./db.ts",
   "exports": {
