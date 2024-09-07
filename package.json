@@ -8,7 +8,8 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "ui:add": "pnpm --filter @instamate/ui ui:add"
+    "ui:add": "pnpm --filter @instamate/ui ui:add",
+    "deploy": "turbo run build --filter=web --include-dependencies --no-deps"
   },
   "devDependencies": {
     "@instamate/eslint-config": "workspace:*",

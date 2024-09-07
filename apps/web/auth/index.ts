@@ -1,9 +1,19 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Google from "next-auth/providers/google";
 import Facebook from "next-auth/providers/facebook";
 import Instagram from "next-auth/providers/instagram";
 import { prisma } from "@instamate/db";
+import axios from "axios";
+
+const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
+export interface InstamateSession extends Session {
+  instagramBusinessAccount: { id: string };
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpires: number;
+  error: string;
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma as any),
@@ -17,28 +27,27 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
       },
     }),
-    Facebook({
-      //   authorization: {
-      //     params: {
-      //       scopes: [
-      //         "instagram_basic",
-      //         "instagram_content_publish",
-      //         "instagram_manage_comments",
-      //         "instagram_manage_insights",
-      //         "pages_show_list",
-      //         "pages_read_engagement",
-      //       ],
-      //       redirect_uri: `http://localhost:3000/callback/facebook`,
-      //       config_id: 466535422773862,
-      //     },
-      //   },
-    }),
+    Facebook,
   ],
   callbacks: {
     // @ts-ignore
     async jwt(props) {
       const { token, account, user, profile } = props;
-      // console.log("here in jwt", props);
+
+      let instagramBusinessAccount = token.instagramBusinessAccount;
+
+      if (!instagramBusinessAccount) {
+        try {
+          const { data } = await axios.get(
+            `https://graph.facebook.com/v20.0/me/accounts?fields=id%2Cname%2Caccess_token%2Cinstagram_business_account&access_token=${account?.access_token}`,
+          );
+          console.log("here jwt data", data?.data);
+          instagramBusinessAccount = data?.data[0]?.instagram_business_account;
+        } catch (error) {
+          console.log("here jwt error", error);
+        }
+      }
+
       if (account && user) {
         return {
           accessToken: account.access_token,
@@ -47,6 +56,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             ? account?.expires_at * 1000
             : null,
           user: profile ? profile : user,
+          instagramBusinessAccount,
         };
       }
 
@@ -68,14 +78,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         // ...newToken,
       };
     },
-    async session({ session, token }: any) {
-      session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
-      session.accessTokenExpires = token.accessTokenExpires;
-      session.error = token.error;
-      session.user = token.user;
-
-      return session;
+    async session({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: any;
+    }): Promise<InstamateSession> {
+      return {
+        ...session,
+        accessToken: token.accessToken,
+        refreshToken: token.refreshToken,
+        accessTokenExpires: token.accessTokenExpires,
+        error: token.error,
+        user: token.user,
+        instagramBusinessAccount: token.instagramBusinessAccount,
+      };
     },
     authorized: async ({ auth }) => {
       return !!auth;
@@ -85,4 +103,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/signin",
   },
   session: { strategy: "jwt" },
+  cookies: {
+    pkceCodeVerifier: {
+      name: "next-auth.pkce.code_verifier",
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: false,
+      },
+    },
+    sessionToken: {
+      name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        // When working on localhost, the cookie domain must be omitted entirely (https://stackoverflow.com/a/1188145)
+        domain: VERCEL_DEPLOYMENT
+          ? `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+          : undefined,
+        secure: VERCEL_DEPLOYMENT,
+      },
+    },
+  },
 });
