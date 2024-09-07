@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "ui:add": "pnpm dlx shadcn-ui@latest add",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "tsc"
   },
   "peerDependencies": {
     "react": "^18"
@@ -34,18 +35,18 @@
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },
-  "types": "./src/index.tsx",
+  "types": "./src/index.js",
   "exports": {
     ".": {
-      "require": "./src/index.tsx",
-      "import": "./src/index.tsx",
-      "default": "./src/index.tsx",
-      "types": "./src/index.tsx"
+      "require": "./src/index.js",
+      "import": "./src/index.js",
+      "default": "./src/index.js",
+      "types": "./src/index.js"
     },
     "./*": {
-      "require": "./src/index.tsx",
-      "import": "./src/index.tsx",
-      "types": "./src/index.tsx"
+      "require": "./src/index.js",
+      "import": "./src/index.js",
+      "types": "./src/index.js"
     }
   }
 }

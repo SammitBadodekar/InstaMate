@@ -5,7 +5,7 @@ import { signIn } from "@/auth/helper";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Steps from "./steps";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { BsFacebook } from "react-icons/bs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,6 +31,14 @@ const FormSchema = z.object({
 });
 
 export default function SignIn() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignInForm />
+    </Suspense>
+  );
+}
+
+const SignInForm = () => {
   const session = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -62,7 +70,6 @@ export default function SignIn() {
       },
     );
   }
-
   return (
     <div className="flex ">
       <Steps />
@@ -139,4 +146,4 @@ export default function SignIn() {
       </div>
     </div>
   );
-}
+};
