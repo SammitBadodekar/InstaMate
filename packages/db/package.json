@@ -21,16 +21,6 @@
   },
   "types": "./db.ts",
   "exports": {
-    ".": {
-      "require": "./db.ts",
-      "import": "./db.ts",
-      "default": "./db.ts",
-      "types": "./db.ts"
-    },
-    "./*": {
-      "require": "./db.ts",
-      "import": "./db.ts",
-      "types": "./db.ts"
-    }
+    ".": "./src/index.ts"
   }
 }

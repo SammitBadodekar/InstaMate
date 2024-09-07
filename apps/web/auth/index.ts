@@ -3,10 +3,10 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import Google from "next-auth/providers/google";
 import Facebook from "next-auth/providers/facebook";
 import Instagram from "next-auth/providers/instagram";
-import { prisma } from "@instamate/db";
+import { PrismaClient, User } from "@instamate/db";
 import axios from "axios";
 
-const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
+export const prisma = new PrismaClient();
 export interface InstamateSession extends Session {
   instagramBusinessAccount: { id: string };
   accessToken: string;
@@ -103,28 +103,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/signin",
   },
   session: { strategy: "jwt" },
-  cookies: {
-    pkceCodeVerifier: {
-      name: "next-auth.pkce.code_verifier",
-      options: {
-        httpOnly: true,
-        sameSite: "none",
-        path: "/",
-        secure: false,
-      },
-    },
-    sessionToken: {
-      name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        // When working on localhost, the cookie domain must be omitted entirely (https://stackoverflow.com/a/1188145)
-        domain: VERCEL_DEPLOYMENT
-          ? `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
-          : undefined,
-        secure: VERCEL_DEPLOYMENT,
-      },
-    },
-  },
 });
