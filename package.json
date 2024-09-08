@@ -15,6 +15,7 @@
     "@instamate/eslint-config": "workspace:*",
     "@instamate/typescript-config": "workspace:*",
     "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.6",
     "turbo": "latest"
   },
   "packageManager": "pnpm@8.9.0",

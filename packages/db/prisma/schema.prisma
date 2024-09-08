@@ -15,11 +15,21 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
+  insights      DailyInsight[]
   Authenticator Authenticator[]
-  instagramAccessToken String?
-  instagramRefreshToken String?
- 
+  instagram_business_account_id String? @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DailyInsight {
+  id String @id @default(cuid())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+  comments_count Int
+  story_replies_count Int
+  direct_messages_count Int
+  story_mentions_count Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
