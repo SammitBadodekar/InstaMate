@@ -7,17 +7,17 @@ import {
   PopoverTrigger,
   Button,
 } from "@instamate/ui";
-import { signOut } from "@/auth/helper";
-import { useSession } from "next-auth/react";
+// import { signOut } from "@/auth/helper";
+// import { useSession } from "next-auth/react";
 
 const Profile = () => {
-  const { data: session }: any = useSession();
-  console.log(session);
+  // const { data: session }: any = useSession();
+  // console.log(session);
   return (
     <Popover>
       <PopoverTrigger className="flex items-center gap-2">
         <Avatar className="mt-auto">
-          <AvatarImage src={session?.user?.picture.data.url!} />
+          {/* <AvatarImage src={session?.user?.picture.data.url!} /> */}
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <p className="hidden xl:block">Profile</p>
@@ -25,12 +25,12 @@ const Profile = () => {
       <PopoverContent align="end" className="w-fit flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <Avatar className="mt-auto">
-            <AvatarImage src={session?.user?.picture.data.url!} />
+            {/* <AvatarImage src={session?.user?.picture.data.url!} /> */}
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <p>{session?.user?.name}</p>
+          {/* <p>{session?.user?.name}</p> */}
         </div>
-        <Button onClick={() => signOut()}>Sign Out</Button>
+        {/* <Button onClick={() => signOut()}>Sign Out</Button> */}
       </PopoverContent>
     </Popover>
   );

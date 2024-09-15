@@ -13,7 +13,7 @@ import {
   Checkbox,
 } from "@instamate/ui";
 import { useSession } from "next-auth/react";
-import { signIn } from "@/auth/helper";
+// import { signIn } from "@/auth/helper";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Sidebar from "./sidebar";
@@ -34,15 +34,15 @@ const FormSchema = z.object({
 });
 
 const SignInForm = () => {
-  const session = useSession();
+  // const session = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [steps, setSteps] = useState();
 
-  console.log(session);
-  if (session.status === "authenticated") {
-    router.push(searchParams.get("callback") || "/");
-  }
+  // console.log(session);
+  // if (session.status === "authenticated") {
+  //   router.push(searchParams.get("callback") || "/");
+  // }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -50,20 +50,22 @@ const SignInForm = () => {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    await signIn(
-      "facebook",
-      {},
-      {
-        scope:
-          "instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement,business_management,email",
-        response_type: "code",
-        redirect_uri: `http://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/api/auth/callback/facebook`,
-        extras: JSON.stringify({
-          setup: { channel: "IG_API_ONBOARDING" },
-        }),
-        display: "page",
-      },
-    );
+    router.push(`/api/auth/login/facebook`);
+    // router.push(`https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id=1289989455743913&redirect_uri=https://app.instamate.in/api/auth/callback/instagram&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish`);
+    // await signIn(
+    //   "facebook",
+    //   {},
+    //   {
+    //     scope:
+    //       "instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement,business_management,email",
+    //     response_type: "code",
+    //     redirect_uri: `http://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/api/auth/callback/facebook`,
+    //     extras: JSON.stringify({
+    //       setup: { channel: "IG_API_ONBOARDING" },
+    //     }),
+    //     display: "page",
+    //   },
+    // );
   }
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 w-full h-dvh">
