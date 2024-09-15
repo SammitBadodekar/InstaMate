@@ -4,23 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate"
+    "db:generate": "drizzle-kit generate:pg --schema ./src/drizzle/schema.ts --out=./src/drizzle/migrations",
+    "db:migrate": "pnpm run ./src/db/migrate.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20",
+    "@types/uuid": "^10.0.0",
+    "drizzle-kit": "^0.24.2",
     "prisma": "^5.16.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.9.5",
     "@prisma/client": "5.19.0",
-    "client@latest": "link:prisma/client@latest"
+    "client@latest": "link:prisma/client@latest",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.33.0",
+    "uuid": "^10.0.0"
   },
-  "types": "./db.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts"
   }
