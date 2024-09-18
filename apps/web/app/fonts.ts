@@ -1,6 +1,6 @@
-import { Fascinate_Inline } from "next/font/google";
+import { Lobster_Two } from "next/font/google";
 
-export const fascinate = Fascinate_Inline({
+export const fascinate = Lobster_Two({
   subsets: ["latin"],
   weight: ["400"],
 });

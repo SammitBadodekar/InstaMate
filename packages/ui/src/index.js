@@ -63,3 +63,18 @@ export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./comp
 export { Toaster } from "./components/ui/sonner";
 export { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 export { Popover, PopoverTrigger, PopoverContent } from "./components/ui/popover";
+export { Badge, badgeVariants } from "./components/ui/badge";
+export { Input } from "./components/ui/input";
+export { Label } from "./components/ui/label";
+export {
+  Sheet,
+  SheetPortal,
+  SheetOverlay,
+  SheetTrigger,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+} from "./components/ui/sheet";
