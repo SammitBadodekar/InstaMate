@@ -1,9 +1,25 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import instagram from "./auth/facebook";
+import { env, getRuntimeKey } from "hono/adapter";
+
 export const runtime = "edge";
 
-const app = new Hono().basePath("/api");
+export type Env = {
+  AUTH_SECRET: string;
+  AUTH_GOOGLE_ID: string;
+  AUTH_GOOGLE_SECRET: string;
+  AUTH_FACEBOOK_ID: string;
+  AUTH_FACEBOOK_SECRET: string;
+  AUTH_INSTAGRAM_ID: string;
+  AUTH_INSTAGRAM_SECRET: string;
+  FACEBOOK_CONFIG_ID: string;
+  NEXT_PUBLIC_ROOT_DOMAIN: string;
+  NEXT_PUBLIC_URL: string;
+  DATABASE_URL: string;
+};
+
+const app = new Hono<{ Bindings: Env }>().basePath("/api");
 
 app.route("/auth", instagram);
 

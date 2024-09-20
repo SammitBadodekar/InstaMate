@@ -6,17 +6,18 @@ import { lucia } from "@/lib/auth";
 import { Facebook, generateState } from "arctic";
 import { getCookie, setCookie } from "hono/cookie";
 import { db, eq, userTable } from "@instamate/db";
-
-const env = process.env;
-const clientId = env.AUTH_FACEBOOK_ID as string;
-const clientSecret = env.AUTH_FACEBOOK_SECRET as string;
-const redirectURI = `${env.NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
+import { Env } from "../route";
 
 const app = new Hono();
-const facebook = new Facebook(clientId, clientSecret, redirectURI);
 
 app.get("/login/facebook", async (c) => {
   try {
+    const facebookEnv = c.env as Env;
+    const clientId = facebookEnv.AUTH_FACEBOOK_ID as string;
+    const clientSecret = facebookEnv.AUTH_FACEBOOK_SECRET as string;
+    const redirectURI = `${facebookEnv.NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
+    const facebook = new Facebook(clientId, clientSecret, redirectURI);
+
     const state = generateState();
     const url: URL = await facebook.createAuthorizationURL(state, {
       scopes: [
@@ -32,7 +33,7 @@ app.get("/login/facebook", async (c) => {
     });
 
     setCookie(c, "state", state, {
-      secure: process.env.NODE_ENV === "production",
+      secure: (c.env as any).NODE_ENV === "production",
       path: "/",
       httpOnly: true,
       maxAge: 60 * 10,
@@ -46,6 +47,12 @@ app.get("/login/facebook", async (c) => {
 });
 
 app.get("/callback/facebook", async (c) => {
+  const facebookEnv = c.env as Env;
+  const clientId = facebookEnv.AUTH_FACEBOOK_ID as string;
+  const clientSecret = facebookEnv.AUTH_FACEBOOK_SECRET as string;
+  const redirectURI = `${facebookEnv.NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
+  const facebook = new Facebook(clientId, clientSecret, redirectURI);
+
   const code = c.req.queries("code");
   const state = c.req.queries("state");
   const storedState = getCookie(c, "state");

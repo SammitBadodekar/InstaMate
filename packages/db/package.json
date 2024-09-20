@@ -19,6 +19,7 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "@libsql/client": "^0.13.0",
     "@neondatabase/serverless": "^0.9.5",
     "@prisma/client": "5.19.0",
     "client@latest": "link:prisma/client@latest",
