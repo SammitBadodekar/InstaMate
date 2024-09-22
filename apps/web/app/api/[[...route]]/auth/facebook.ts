@@ -2,21 +2,30 @@ import { Hono } from "hono";
 import { cookies } from "next/headers";
 import { FacebookTokens, OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
-import { lucia } from "@/lib/auth";
+import { getLuciaClient } from "@/lib/auth";
 import { Facebook, generateState } from "arctic";
 import { getCookie, setCookie } from "hono/cookie";
-import { db, eq, userTable } from "@instamate/db";
+import { buildLibsqlClient, eq, userTable } from "@instamate/db";
+import { env } from "hono/adapter";
 import { Env } from "../route";
+import { drizzle } from "drizzle-orm/d1";
 
 const app = new Hono();
 
 app.get("/login/facebook", async (c) => {
   try {
-    const facebookEnv = c.env as Env;
-    const clientId = facebookEnv.AUTH_FACEBOOK_ID as string;
-    const clientSecret = facebookEnv.AUTH_FACEBOOK_SECRET as string;
-    const redirectURI = `${facebookEnv.NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
-    const facebook = new Facebook(clientId, clientSecret, redirectURI);
+    const {
+      AUTH_FACEBOOK_ID,
+      AUTH_FACEBOOK_SECRET,
+      NODE_ENV,
+      NEXT_PUBLIC_URL,
+    } = env<Env>(c);
+    const redirectURI = `${NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
+    const facebook = new Facebook(
+      AUTH_FACEBOOK_ID,
+      AUTH_FACEBOOK_SECRET,
+      redirectURI,
+    );
 
     const state = generateState();
     const url: URL = await facebook.createAuthorizationURL(state, {
@@ -39,6 +48,7 @@ app.get("/login/facebook", async (c) => {
       maxAge: 60 * 10,
     });
 
+    console.log("here in facebook url", url.toString());
     return c.redirect(url.toString(), 302);
   } catch (error) {
     console.log(error);
@@ -47,11 +57,20 @@ app.get("/login/facebook", async (c) => {
 });
 
 app.get("/callback/facebook", async (c) => {
-  const facebookEnv = c.env as Env;
-  const clientId = facebookEnv.AUTH_FACEBOOK_ID as string;
-  const clientSecret = facebookEnv.AUTH_FACEBOOK_SECRET as string;
-  const redirectURI = `${facebookEnv.NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
-  const facebook = new Facebook(clientId, clientSecret, redirectURI);
+  const {
+    AUTH_FACEBOOK_ID,
+    AUTH_FACEBOOK_SECRET,
+    NODE_ENV,
+    NEXT_PUBLIC_URL,
+    DATABASE_URL,
+    DATABASE_AUTH_TOKEN,
+  } = env<Env>(c);
+  const redirectURI = `${NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
+  const facebook = new Facebook(
+    AUTH_FACEBOOK_ID,
+    AUTH_FACEBOOK_SECRET,
+    redirectURI,
+  );
 
   const code = c.req.queries("code");
   const state = c.req.queries("state");
@@ -97,6 +116,8 @@ app.get("/callback/facebook", async (c) => {
       const instagramBusinessAccountId =
         instagramBusinessAccount?.data?.[0]?.instagram_business_account?.id;
 
+      const db = buildLibsqlClient(DATABASE_URL, DATABASE_AUTH_TOKEN);
+      const lucia = getLuciaClient(DATABASE_URL, DATABASE_AUTH_TOKEN, NODE_ENV);
       const existingUser = await db
         .select()
         .from(userTable)

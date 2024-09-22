@@ -1,4 +1,1 @@
-[[d1_databases]]
-binding = "DB" # i.e. available in your Worker on env.DB
-database_name = "instamate"
-database_id = "4fd3ca2e-09a0-4654-99ca-4ab8144b6d0d"
+compatibility_date = "2024-09-09"

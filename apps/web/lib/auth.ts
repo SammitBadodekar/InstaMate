@@ -1,28 +1,39 @@
 import { Lucia } from "lucia";
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
-import { db, sessionTable, userTable } from "@instamate/db";
+import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
+import { buildLibsqlClient, sessionTable, userTable } from "@instamate/db";
 
-const adapter = new DrizzlePostgreSQLAdapter(
-  db as any,
-  sessionTable as any,
-  userTable as any,
-);
+export const getLuciaClient = (
+  DATABASE_URL: string,
+  DATABASE_AUTH_TOKEN: string,
+  NODE_ENV: string,
+) => {
+  const db = buildLibsqlClient(
+    DATABASE_URL as string,
+    DATABASE_AUTH_TOKEN as string,
+  );
+  const adapter = new DrizzleSQLiteAdapter(
+    db as any,
+    sessionTable as any,
+    userTable as any,
+  );
 
-export const lucia = new Lucia(adapter, {
-  sessionCookie: {
-    expires: false,
-    attributes: {
-      secure: false,
+  const lucia = new Lucia(adapter, {
+    sessionCookie: {
+      expires: false,
+      attributes: {
+        secure: NODE_ENV === "production",
+      },
     },
-  },
-  getUserAttributes: (attributes) => {
-    return attributes;
-  },
-});
+    getUserAttributes: (attributes) => {
+      return attributes;
+    },
+  });
+  return lucia;
+};
 
 declare module "lucia" {
   interface Register {
-    Lucia: typeof lucia;
+    Lucia: Lucia<Record<never, never>, DatabaseUserAttributes>;
     DatabaseUserAttributes: DatabaseUserAttributes;
   }
 }
