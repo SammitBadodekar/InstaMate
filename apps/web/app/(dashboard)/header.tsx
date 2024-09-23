@@ -25,7 +25,7 @@ import {
   SheetTrigger,
 } from "@instamate/ui";
 import { SidebarLinks } from "./sidebar";
-import { validateRequest } from "@/lib/validate-request";
+import { validateRequest } from "../../lib/validate-request";
 import { logout } from "@/lib/logout";
 
 const Header = async () => {
