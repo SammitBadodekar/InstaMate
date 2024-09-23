@@ -2,7 +2,7 @@ import { validateRequest } from "./validate-request";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { ActionResult } from "next/dist/server/app-render/types";
-import { getLuciaClient } from "@/lib/auth";
+import { getLuciaClient } from "../lib/auth";
 
 export async function logout(): Promise<ActionResult> {
   "use server";
