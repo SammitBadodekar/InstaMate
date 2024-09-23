@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import getStartedSvg from "@/public/svg/man-riding-a-rocket.svg";
+import getStartedSvg from "@/public/man-riding-a-rocket.svg";
 import { fascinate } from "../fonts";
 
 const Sidebar = () => {

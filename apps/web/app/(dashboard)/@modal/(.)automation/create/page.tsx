@@ -80,8 +80,6 @@ const Page = () => {
   );
 };
 
-export default Page;
-
 import {
   BaseEdge,
   EdgeLabelRenderer,
@@ -90,7 +88,7 @@ import {
 } from "@xyflow/react";
 import { ArrowBigDown, SquarePlus } from "lucide-react";
 
-export function AddNode(props: EdgeProps) {
+function AddNode(props: EdgeProps) {
   const {
     id,
     sourceX,
@@ -147,7 +145,7 @@ export function AddNode(props: EdgeProps) {
   );
 }
 
-export function CustomNode(props: NodeProps) {
+function CustomNode(props: NodeProps) {
   return (
     <div className="p-2 w-full min-w-40 flex justify-center items-center h-full bg-white shadow-md rounded-md">
       <p>{props?.data?.label as string}</p>
@@ -157,7 +155,7 @@ export function CustomNode(props: NodeProps) {
   );
 }
 
-export function CustomHandle(props: HandleProps) {
+function CustomHandle(props: HandleProps) {
   return (
     <Handle
       className="shadow-md"
@@ -171,3 +169,5 @@ export function CustomHandle(props: HandleProps) {
     />
   );
 }
+
+export default Page;
