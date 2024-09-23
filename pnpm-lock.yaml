@@ -125,6 +125,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.4)
+      typescript:
+        specifier: ^5
+        version: 5.4.5
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -147,9 +150,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.4
-      typescript:
-        specifier: ^5
-        version: 5.4.5
       wrangler:
         specifier: ^3.78.6
         version: 3.78.6
@@ -8163,7 +8163,6 @@ packages:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
 
   /typescript@5.5.3:
     resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
