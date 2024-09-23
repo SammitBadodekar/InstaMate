@@ -16,6 +16,8 @@ export type Env = {
   DATABASE_URL: string;
   DATABASE_AUTH_TOKEN: string;
   NODE_ENV: string;
+  NEXT_PUBLIC_FAST_MODE: string;
+  NEXT_PUBLIC_API_URL: string;
 };
 
 const app = new Hono<{ Bindings: Env }>().basePath("/api");

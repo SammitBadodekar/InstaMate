@@ -1,15 +1,13 @@
+import { time } from "console";
 import { relations } from "drizzle-orm";
 import {
-  serial,
   text,
-  timestamp,
   integer,
-  pgTable,
-  uuid,
+  sqliteTable,
   uniqueIndex,
-} from "drizzle-orm/pg-core";
+} from "drizzle-orm/sqlite-core";
 
-export const userTable = pgTable("user", {
+export const userTable = sqliteTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   image: text("image"),
@@ -17,26 +15,20 @@ export const userTable = pgTable("user", {
   instagramBusinessAccountId: text("instagram_business_account_id").unique(),
   instagramPageName: text("instagram_page_name"),
   accessToken: text("access_token"),
-  accessTokenExpires: timestamp("access_token_expires", {
-    withTimezone: true,
-    mode: "date",
-  }),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  accessTokenExpires: text("access_token_expires"),
+  createdAt: text("created_at"),
+  updatedAt: text("updated_at"),
 });
 
-export const sessionTable = pgTable("session", {
+export const sessionTable = sqliteTable("session", {
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id),
-  expiresAt: timestamp("expires_at", {
-    withTimezone: true,
-    mode: "date",
-  }).notNull(),
+  expiresAt: text("expires_at").notNull(),
 });
 
-export const DailyInsight = pgTable("daily_insight", {
+export const DailyInsight = sqliteTable("daily_insight", {
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
@@ -46,6 +38,6 @@ export const DailyInsight = pgTable("daily_insight", {
   storyRepliesCount: integer("story_replies_count").notNull(),
   directMessagesCount: integer("direct_messages_count").notNull(),
   storyMentionsCount: integer("story_mentions_count").notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  createdAt: text("created_at"),
+  updatedAt: text("updated_at"),
 });

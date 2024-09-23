@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db:generate": "drizzle-kit generate:pg --schema ./src/drizzle/schema.ts --out=./src/drizzle/migrations",
-    "db:migrate": "pnpm run ./src/db/migrate.ts"
+    "db:generate": "drizzle-kit generate --schema ./src/schema.ts --out=./migrations --dialect=sqlite",
+    "db:migrate": "pnpm exec ts-node src/migrate.ts"
   },
   "keywords": [],
   "author": "",

@@ -19,6 +19,8 @@ app.get("/login/facebook", async (c) => {
       AUTH_FACEBOOK_SECRET,
       NODE_ENV,
       NEXT_PUBLIC_URL,
+      NEXT_PUBLIC_FAST_MODE,
+      NEXT_PUBLIC_API_URL,
     } = env<Env>(c);
     const redirectURI = `${NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
     const facebook = new Facebook(
@@ -64,6 +66,8 @@ app.get("/callback/facebook", async (c) => {
     NEXT_PUBLIC_URL,
     DATABASE_URL,
     DATABASE_AUTH_TOKEN,
+    NEXT_PUBLIC_FAST_MODE,
+    NEXT_PUBLIC_API_URL,
   } = env<Env>(c);
   const redirectURI = `${NEXT_PUBLIC_URL}/api/auth/callback/facebook`;
   const facebook = new Facebook(
@@ -129,10 +133,6 @@ app.get("/callback/facebook", async (c) => {
       if (existingUser.length > 0) {
         const session = await lucia.createSession(existingUser?.[0]?.id!, {});
         const sessionCookie = lucia.createSessionCookie(session.id);
-        console.log(
-          "here in facebook sessionCookie.attributes",
-          sessionCookie.attributes,
-        );
         cookies().set(
           sessionCookie.name,
           sessionCookie.value,
@@ -161,23 +161,19 @@ app.get("/callback/facebook", async (c) => {
         image: user?.picture?.data?.url,
       });
       const sessionCookie = lucia.createSessionCookie(session.id);
-      console.log(
-        "here in facebook sessionCookie.attributes",
-        sessionCookie.attributes,
-      );
       cookies().set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes,
       );
     }
-    return c.redirect("/", 302);
-  } catch (e) {
+    return c.redirect(`${NEXT_PUBLIC_URL}/`, 302);
+  } catch (e: any) {
     if (e instanceof OAuth2RequestError) {
       const { message, description, request } = e;
       return c.json({ error: message, description }, 400);
     }
-    return c.json({ error: e }, 400);
+    return c.json({ error: e.message }, 400);
   }
 });
 

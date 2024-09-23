@@ -1,12 +1,16 @@
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
-import * as schema from "./schema";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
 
-const sql = neon(process.env.DATABASE_URL!);
-
-export const db = drizzle(sql, {
-  schema,
-});
+export const buildLibsqlClient = (
+  DATABASE_URL: string,
+  DATABASE_AUTH_TOKEN: string,
+) => {
+  const client = createClient({
+    url: DATABASE_URL,
+    authToken: DATABASE_AUTH_TOKEN,
+  });
+  return drizzle(client);
+};
 
 export * from "./schema";
 export * from "drizzle-orm";
