@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { cookies } from "next/headers";
 import { FacebookTokens, OAuth2RequestError } from "arctic";
 import { generateIdFromEntropySize } from "lucia";
-import { getLuciaClient } from "@/lib/auth";
+import { getLuciaClient } from "../../../../lib/auth";
 import { Facebook, generateState } from "arctic";
 import { getCookie, setCookie } from "hono/cookie";
 import { buildLibsqlClient, eq, userTable } from "@instamate/db";
